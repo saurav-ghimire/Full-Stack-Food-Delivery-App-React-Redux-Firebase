@@ -1,7 +1,9 @@
 import logo from '../assets/logo.png'
 import Avatar from '../assets/avatar.png'
 
-import { IoBasket } from "react-icons/io5";
+import { IoBasket, IoLogOut } from "react-icons/io5";
+import { IoMdAdd } from "react-icons/io";
+
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -20,12 +22,15 @@ function Header() {
   const login = async() => {
     
     const { user } = await signInWithPopup(firebaseAuth, provider);
-    const { refreshToken, providerData } = user;
-    dispatch(userActions.storeUser(providerData[0]));
-
+      const { refreshToken, providerData } = user;
+      dispatch(userActions.storeUser(providerData[0]));
+    
   }
   const userDetails = useSelector((store) => store)
   
+  const handleLogOut = () => {
+   dispatch(userActions.logOutUser()); 
+  }
   return <>
   <header className='w-screen fixed z-50 p-6 px-16'>
     {/* Desktop and Tablet */}
@@ -50,13 +55,27 @@ function Header() {
           </div>
         </div>
         
-        <div className='relative overflow-hidden	'>
+        <div className='relative'>
           <motion.img
           whileTap={{scale:(0.6)}} 
           onClick={login}
           src={ userDetails.user ? userDetails.user.photoURL : Avatar } alt="User Image" className='w-10 min-w-[40px] min-h-[40px] cursor-pointer rounded-3xl drop-shadow-2xl ml-8' />
+
+          <div className='w-40 bg-gray-50 shadow-xl rounded-lg flex flex-col absolute top-12 right-0 overflow-hidden'>
+            {
+              userDetails.user && userDetails.user.email === "sauravghimire0123@gmail.com" && (
+                <p className='flex px-4 py-2 items-center cursor-pointer hover:bg-slate-200 transition-all duration-100 ease-in-out text-textColor text-base'><IoMdAdd className='mr-2'/> New Item</p>
+              )
+            }
+            <p className='flex px-4 py-2 items-center cursor-pointer hover:bg-slate-200 transition-all duration-100 ease-in-out text-textColor text-base '
+            onClick={() => handleLogOut() }
+            ><IoLogOut className='mr-2' /> Logout</p>
+          </div>
+
         </div>
         
+        
+
       </div>
       </div>
 

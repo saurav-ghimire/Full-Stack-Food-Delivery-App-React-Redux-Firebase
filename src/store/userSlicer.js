@@ -6,6 +6,9 @@ const userSlice = createSlice({
   reducers:{
     storeUser: (store, action) => {
     return store = action.payload;
+    },
+    logOutUser : (store) => {
+      return store = null
     }
   }
 });
