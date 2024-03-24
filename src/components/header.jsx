@@ -10,10 +10,14 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import {app} from '../../firebase.config'
 import { userActions } from '../store/userSlicer';
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 
 
 function Header() {
+  const [toggleLogin, setToggleLogin] = useState(false);
   const dispatch = useDispatch();
+  
+  const userDetails = useSelector((store) => store)
   
   // to authenticate
   const firebaseAuth = getAuth(app)
@@ -21,12 +25,18 @@ function Header() {
 
   const login = async() => {
     
-    const { user } = await signInWithPopup(firebaseAuth, provider);
+    if(!userDetails.user){
+      const { user } = await signInWithPopup(firebaseAuth, provider);
       const { refreshToken, providerData } = user;
       dispatch(userActions.storeUser(providerData[0]));
+    }else{
+      setToggleLogin(!toggleLogin)
+    }
     
   }
-  const userDetails = useSelector((store) => store)
+
+  console.log(toggleLogin)
+  
   
   const handleLogOut = () => {
    dispatch(userActions.logOutUser()); 
@@ -60,17 +70,23 @@ function Header() {
           whileTap={{scale:(0.6)}} 
           onClick={login}
           src={ userDetails.user ? userDetails.user.photoURL : Avatar } alt="User Image" className='w-10 min-w-[40px] min-h-[40px] cursor-pointer rounded-3xl drop-shadow-2xl ml-8' />
-
+          {toggleLogin && (
           <div className='w-40 bg-gray-50 shadow-xl rounded-lg flex flex-col absolute top-12 right-0 overflow-hidden'>
             {
               userDetails.user && userDetails.user.email === "sauravghimire0123@gmail.com" && (
                 <p className='flex px-4 py-2 items-center cursor-pointer hover:bg-slate-200 transition-all duration-100 ease-in-out text-textColor text-base'><IoMdAdd className='mr-2'/> New Item</p>
               )
             }
+            {
+              userDetails.user && (
             <p className='flex px-4 py-2 items-center cursor-pointer hover:bg-slate-200 transition-all duration-100 ease-in-out text-textColor text-base '
             onClick={() => handleLogOut() }
             ><IoLogOut className='mr-2' /> Logout</p>
+                )
+            }
+            
           </div>
+          )}
 
         </div>
         
