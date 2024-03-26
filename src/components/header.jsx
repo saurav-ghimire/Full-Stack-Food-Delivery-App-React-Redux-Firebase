@@ -10,7 +10,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from '../../firebase.config'
 import { userActions } from '../store/userSlicer';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { toast } from 'react-toastify';
 
@@ -18,7 +18,7 @@ function Header() {
   const [toggleLogin, setToggleLogin] = useState(false);
   const dispatch = useDispatch();
   const userDetails = useSelector((store) => store.user)
-  console.log(userDetails)
+  
   // to authenticate
   const firebaseAuth = getAuth(app)
   const provider = new GoogleAuthProvider();
@@ -50,6 +50,8 @@ function Header() {
     toast(message);
   }
 
+
+
   return (
     <header className='w-screen fixed z-50 p-3 px-8 md:p-6 md:px-16'>
       {/* Desktop and Tablet */}
@@ -70,8 +72,11 @@ function Header() {
           animate = {{opacity : 1, x:0}}
           exit = {{opacity : 0, x:200}}
            className='flex items-center gap-8 '>
-            <li className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>Home</li>
-            <li className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>About us</li>
+            <li className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>
+              <Link to='/'>Home</Link>
+              </li>
+            <li className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>
+            <Link to='/'>About us </Link></li>
             <li className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>Menu</li>
             <li className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>Services</li>
           </motion.ul>
@@ -98,9 +103,11 @@ function Header() {
               className='w-40 bg-gray-50 shadow-xl rounded-lg flex flex-col absolute top-12 right-0 overflow-hidden'>
                 {
                   userDetails && userDetails.email === "sauravghimire0123@gmail.com" && (
+                    <Link to='/createitems'>
                     <p className='flex px-4 py-2 items-center cursor-pointer hover:bg-slate-200 transition-all duration-100 ease-in-out text-textColor text-base'>
                       <IoMdAdd className='mr-2' /> New Item
                     </p>
+                    </Link>
                   )
                 }
                 {
@@ -157,9 +164,11 @@ function Header() {
               className='w-40 bg-gray-50 shadow-xl rounded-lg flex flex-col absolute top-12 right-0 overflow-hidden'>
                 {
                   userDetails && userDetails.email === "sauravghimire0123@gmail.com" && (
+                    <Link to='/createitems'>
                     <p className='flex px-4 py-2 items-center cursor-pointer hover:bg-slate-200 transition-all duration-100 ease-in-out text-textColor text-base'>
                       <IoMdAdd className='mr-2' /> New Item
                     </p>
+                    </Link>
                   )
                 }
                 <motion.ul

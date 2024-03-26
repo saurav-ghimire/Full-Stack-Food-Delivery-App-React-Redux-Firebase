@@ -9,11 +9,13 @@ function App() {
   return (
     <>
     <AnimatePresence>
-      <div className='w-screen h-screen bg-primary'>
+      <div className="wrapper">
+      <div className='bg-primary'>
       <Header />
       <Outlet/>
 
       <ToastContainer />
+      </div>
       </div>
     </AnimatePresence>
     </>
