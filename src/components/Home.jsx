@@ -1,18 +1,8 @@
-import { useSelector } from "react-redux";
+import Banner from './Banner';
 function Home() {
-  
-  const data = useSelector(store => store.user); // Assuming 'name' is your reducer key  
-  const handle = () => {
-
-    console.log('froms tate', data);
-  }
-  return (
-    <>
-      <h1>Home Component</h1>
-      <button onClick={() => handle()}>Click</button>
-      
-    </>
-  );
+  return <>
+  <Banner />
+  </>;
 }
 
 export default Home;
