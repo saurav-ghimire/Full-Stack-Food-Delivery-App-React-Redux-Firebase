@@ -1,10 +1,13 @@
 import Banner from './Banner';
+import Fruits from './fruits';
+
 function Home() {
   return <>
   <Banner />
-  <Banner />
-  <Banner />
-  <Banner />
+  <div className="all-content p-10">
+  <Fruits />  
+  </div>
+  
   </>;
 }
 
