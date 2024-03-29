@@ -53,7 +53,7 @@ function Header() {
 
 
   return (
-    <header className='w-screen fixed z-50 p-3 px-8 md:p-6 md:px-16 backdrop-blur-10'>
+    <header className='w-screen z-50 p-3 px-8 md:p-6 md:px-16'>
       {/* Desktop and Tablet */}
       <div className='hidden md:flex w-full h-full items-center justify-between'>
         <motion.div

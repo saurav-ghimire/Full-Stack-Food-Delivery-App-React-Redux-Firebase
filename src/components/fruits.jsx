@@ -1,15 +1,28 @@
-import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { MdChevronLeft, MdChevronRight, MdShoppingBasket } from "react-icons/md";
-import { getAllFoodItems } from "../utils/firebaseFunctions";
 import { useDispatch, useSelector } from "react-redux";
-import { productActions } from "../store/productSlicer";
-
+import { cartActions } from "../store/cartSlicer";
+import { toast } from 'react-toastify';
 
 function Fruits() {
-  const data = useSelector((store) => store.product);
 
-  const [scrollValue, setScrollValue] = useState(0);
+  // Function to display toast notifications
+  const notify = (message) => {
+    toast(message);
+  }
+
+  const data = useSelector((store) => store.product);
+  
+  const cart = useSelector((store) => store.cart);
+
+  const dispatch = useDispatch();
+
+  const handleCart = (id) => {
+    dispatch(cartActions.addToCart(id));
+    notify("Added to Cart")
+  }
+
+  // console.log(cart)
 
   const handleScroll = (value) => {
     const container = document.getElementById("fruitsContainer");
@@ -49,7 +62,7 @@ function Fruits() {
           data.map((item) => (
             <div
               key={item?.id}
-              className="w-275 h-[175px] min-w-[275px] md:w-300 md:min-w-[300px]  bg-cardOverlay rounded-lg py-2 px-4 my-12 backdrop-blur-lg hover:drop-shadow-lg flex flex-col items-center justify-evenly relative"
+              className="w-275 h-[225px] min-w-[275px] md:w-300 md:min-w-[300px]  bg-cardOverlay rounded-lg py-2 px-4 my-12 backdrop-blur-lg hover:drop-shadow-lg flex flex-col items-center justify-evenly relative"
             >
               <div className="w-full flex items-center justify-between">
                 <motion.div
@@ -65,7 +78,7 @@ function Fruits() {
                 <motion.div
                   whileTap={{ scale: 0.75 }}
                   className="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center cursor-pointer hover:shadow-md -mt-8"
-                  onClick={() => setItems([...cartItems, item])}
+                  onClick={() => handleCart(item.id)}
                 >
                   <MdShoppingBasket className="text-white" />
                 </motion.div>
