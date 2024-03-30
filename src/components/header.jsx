@@ -85,7 +85,7 @@ function Header() {
               </li>
             <li className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>
             <Link to='/about'>About us </Link></li>
-            <li className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>Menu</li>
+            <li className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'><Link to='/menu'>Menu</Link></li>
             <li className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>Services</li>
           </motion.ul>
           <div className="relative flex items-center justify-center cursor-pointer" onClick={() => handleSidebar()}>

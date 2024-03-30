@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'framer-motion';
-import { Header, Loader } from './components'; // Import the Loader component
+import { Header, Loader, Footer } from './components'; // Import the Loader component
 import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -40,6 +40,7 @@ function App() {
             ) : (
               <Outlet />
             )}
+            <Footer />
             <ToastContainer />
           </div>
         </div>
