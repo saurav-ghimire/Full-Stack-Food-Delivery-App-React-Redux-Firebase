@@ -25,6 +25,7 @@ function Header() {
   }
   const dispatch = useDispatch();
   const userDetails = useSelector((store) => store.user)
+  const cartDetails = useSelector((store) => store.cart)
   
   // to authenticate
   const firebaseAuth = getAuth(app)
@@ -91,7 +92,7 @@ function Header() {
           <div className="relative flex items-center justify-center cursor-pointer" onClick={() => handleSidebar()}>
             <IoBasket className='text-textColor text-2xl ml-8 cursor-pointer' />
             <div className="w-5 h-5 rounded-full bg-cartNumBg flex item-center justify-center absolute -top-1 -right-2">
-              <p className='text-xs text-white font-semibold leading-0'>0</p>
+              <p className='text-xs text-white font-semibold leading-0'>{cartDetails.length}</p>
             </div>
           </div>
 
@@ -184,10 +185,10 @@ function Header() {
                 animate = {{opacity : 1, x:0}}
                 exit = {{opacity : 0, x:200}}
                 >
-                  <li className='flex px-4 py-2 items-center cursor-pointer hover:bg-slate-200 transition-all duration-100 ease-in-out text-textColor text-base'>Home</li>
-                  <li className='flex px-4 py-2 items-center cursor-pointer hover:bg-slate-200 transition-all duration-100 ease-in-out text-textColor text-base'>About us</li>
-                  <li className='flex px-4 py-2 items-center cursor-pointer hover:bg-slate-200 transition-all duration-100 ease-in-out text-textColor text-base'>Menu</li>
-                  <li className='flex px-4 py-2 items-center cursor-pointer hover:bg-slate-200 transition-all duration-100 ease-in-out text-textColor text-base'>Services</li>
+                  <li className='flex px-4 py-2 items-center cursor-pointer hover:bg-slate-200 transition-all duration-100 ease-in-out text-textColor text-base'><Link to='/'>Home</Link></li>
+                  <li className='flex px-4 py-2 items-center cursor-pointer hover:bg-slate-200 transition-all duration-100 ease-in-out text-textColor text-base'><Link to='/about'>About us</Link></li>
+                  <li className='flex px-4 py-2 items-center cursor-pointer hover:bg-slate-200 transition-all duration-100 ease-in-out text-textColor text-base'><Link to='/menu'>Menu</Link></li>
+                  <li className='flex px-4 py-2 items-center cursor-pointer hover:bg-slate-200 transition-all duration-100 ease-in-out text-textColor text-base'><Link to='/Service'>Services</Link></li>
                 </motion.ul>
                 {
                   userDetails && (

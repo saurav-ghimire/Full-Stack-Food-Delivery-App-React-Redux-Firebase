@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 
 import {Home} from './components'
-import {CreateItems, About, Menu} from './pages'
+import {CreateItems, About, Menu, Checkout, OrderConfrimation} from './pages'
 
 import FoodStore from './store/index.js';
 import { Provider } from 'react-redux';
@@ -33,6 +33,14 @@ const router = createBrowserRouter([
       {
         path: "/menu",
         element: <Menu />,
+      },
+      {
+        path: "/checkout",
+        element: <Checkout />,
+      },
+      {
+        path: "/order-confirmation",
+        element: <OrderConfrimation />,
       },
       
     ],

@@ -15,6 +15,18 @@ export const saveItem = async (data) => {
   });
 };
 
+// Saving new Item
+export const saveOrder = async (orderData) => {
+  try {
+    await setDoc(doc(firestore, "orders", `${Date.now()}`), orderData, {
+      merge: true,
+    });
+    console.log('Order saved successfully:', orderData);
+  } catch (error) {
+    console.error('Error saving order:', error);
+    throw new Error('Failed to save order');
+  }
+};
 // getall food items
 export const getAllFoodItems = async () => {
   const items = await getDocs(

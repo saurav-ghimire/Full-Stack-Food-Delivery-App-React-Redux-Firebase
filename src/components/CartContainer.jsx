@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import EmptyCart from "../assets/emptyCart.svg";
 import CartItem from "./CartItem";
 import { cartActions } from "../store/cartSlicer";
+import { Link } from "react-router-dom";
 
 const CartContainer = ({action}) => {
   const [tot, setTot] = useState(0);
@@ -88,7 +89,7 @@ const CartContainer = ({action}) => {
               type="button"
               className="w-full p-2 rounded-full bg-gradient-to-tr from-orange-400 to-orange-600 text-gray-50 text-lg my-2 hover:shadow-lg"
             >
-              Check Out
+              <Link to="/checkout">Check out</Link>
             </motion.button>
           </div>
         </div>

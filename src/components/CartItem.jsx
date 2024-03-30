@@ -18,8 +18,8 @@ const CartItem = () => {
         <div key={data.id} className="w-full p-1 px-2 rounded-lg bg-cartItem flex items-center gap-2">
           <img src={data.imageURL} alt={data.title} className="w-12 h-12 object-cover rounded bg-white" />
           <div className="flex-grow">
-            <h3 className="text-sm font-medium">{data.title}</h3>
-            <p className="text-xs text-gray-500">${data.price}</p>
+            <h3 className="text-sm font-medium text-white">{data.title}</h3>
+            <p className="text-xs text-white">${data.price}</p>
           </div>
           <div className="flex items-center space-x-2">
             <button
@@ -28,7 +28,7 @@ const CartItem = () => {
             >
               <BiMinus />
             </button>
-            <span className="text-sm">{data.qty}</span>
+            <span className="text-sm text-white">{data.qty}</span>
             <button
               onClick={() => handleCart(data.id, "increment")}
               className="text-sm text-gray-500"
