@@ -8,6 +8,9 @@ import { cartActions } from "../store/cartSlicer";
 import { toast } from "react-toastify";
 
 function MenuContainer() {
+  // User
+  const userDetails = useSelector((store) => store.user)
+
   const [filter, setFilter] = useState("rice");
   const data = useSelector((store) => store.product);
   const cart = useSelector((store) => store.cart);
@@ -15,30 +18,36 @@ function MenuContainer() {
   const dispatch = useDispatch();
   
 
-   // Function to display toast notifications
-   const notify = (message) => {
-    toast(message);
+   const notify = (message, type) => {
+    if(type){
+      toast.error(message);
+    }else{
+      toast(message);
+    }
   }
 
   const handleCart = (id) => {  
     // Check if any item in the cart has the same id
     const itemExists = cart.some((item) => item.id === id);
-  
-    if (itemExists) {
-      // Item with the id already exists in the cart
-      notify("Already in Cart");
-    } else {
-      // Find the item with the matching id in the data array
-      const foundItem = data.find((item) => item.id === id);
-  
-      if (foundItem) {
-        // Dispatch action to add the item to the cart
-        dispatch(cartActions.addToCart(foundItem));
-        notify("Added to Cart");
+    if(userDetails){
+      if (itemExists) {
+        // Item with the id already exists in the cart
+        notify("Already in Cart", "danger");
       } else {
-        // Item with the id does not exist in the data array
-        console.error(`Item with id ${id} not found.`);
+        // Find the item with the matching id in the data array
+        const foundItem = data.find((item) => item.id === id);
+    
+        if (foundItem) {
+          // Dispatch action to add the item to the cart
+          dispatch(cartActions.addToCart(foundItem));
+          notify("Added to Cart");
+        } else {
+          // Item with the id does not exist in the data array
+          console.error(`Item with id ${id} not found.`);
+        }
       }
+    }else{
+      notify("User need to be loggedin", "danger")
     }
   };
   
