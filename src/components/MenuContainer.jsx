@@ -13,17 +13,36 @@ function MenuContainer() {
   const cart = useSelector((store) => store.cart);
 
   const dispatch = useDispatch();
-  console.log(cart)
+  
 
    // Function to display toast notifications
    const notify = (message) => {
     toast(message);
   }
-  const handleCart = (id) => {
-    dispatch(cartActions.addToCart(id));
-    notify("Added to Cart")
-  }
 
+  const handleCart = (id) => {  
+    // Check if any item in the cart has the same id
+    const itemExists = cart.some((item) => item.id === id);
+  
+    if (itemExists) {
+      // Item with the id already exists in the cart
+      notify("Already in Cart");
+    } else {
+      // Find the item with the matching id in the data array
+      const foundItem = data.find((item) => item.id === id);
+  
+      if (foundItem) {
+        // Dispatch action to add the item to the cart
+        dispatch(cartActions.addToCart(foundItem));
+        notify("Added to Cart");
+      } else {
+        // Item with the id does not exist in the data array
+        console.error(`Item with id ${id} not found.`);
+      }
+    }
+  };
+  
+  
   const filteredData = filter
     ? data.filter((item) => item.category === filter)
     : data;
