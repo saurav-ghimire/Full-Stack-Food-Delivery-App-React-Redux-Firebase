@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 
 import {Home} from './components'
-import {CreateItems} from './pages'
+import {CreateItems, About} from './pages'
 
 import FoodStore from './store/index.js';
 import { Provider } from 'react-redux';
@@ -25,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/createitems",
         element: <CreateItems />,
+      },
+      {
+        path: "/about",
+        element: <About />,
       },
       
     ],

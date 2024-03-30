@@ -84,7 +84,7 @@ function Header() {
               <Link to='/'>Home</Link>
               </li>
             <li className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>
-            <Link to='/'>About us </Link></li>
+            <Link to='/about'>About us </Link></li>
             <li className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>Menu</li>
             <li className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>Services</li>
           </motion.ul>
