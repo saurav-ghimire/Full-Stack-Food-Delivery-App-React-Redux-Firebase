@@ -9,13 +9,13 @@ import EmptyCart from "../assets/emptyCart.svg";
 import CartItem from "./CartItem";
 import { cartActions } from "../store/cartSlicer";
 
-const CartContainer = () => {
+const CartContainer = ({action}) => {
   const [tot, setTot] = useState(0);
   const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  const showCart = () => {
-    // Dispatch action to toggle cart show
+  const hidecart = () => {
+    action(false);
   };
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const CartContainer = () => {
       className="fixed top-0 right-0 w-full md:w-375 h-screen bg-white drop-shadow-md flex flex-col z-[101]"
     >
       <div className="w-full flex items-center justify-between p-4 cursor-pointer">
-        <motion.div whileTap={{ scale: 0.75 }} onClick={showCart}>
+        <motion.div whileTap={{ scale: 0.75 }} onClick={hidecart}>
           <MdOutlineKeyboardBackspace className="text-textColor text-3xl" />
         </motion.div>
         <p className="text-textColor text-lg font-semibold">Cart</p>

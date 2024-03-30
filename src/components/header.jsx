@@ -11,11 +11,18 @@ import { app } from '../../firebase.config'
 import { userActions } from '../store/userSlicer';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import CartContainer from './CartContainer';
 
 import { toast } from 'react-toastify';
 
 function Header() {
+
   const [toggleLogin, setToggleLogin] = useState(false);
+  const [toggleSidebar, setToggleSidebar] = useState(false);
+
+  const handleSidebar = () => {
+    setToggleSidebar(!toggleSidebar);
+  }
   const dispatch = useDispatch();
   const userDetails = useSelector((store) => store.user)
   
@@ -53,6 +60,7 @@ function Header() {
 
 
   return (
+    <>
     <header className='w-screen z-50 p-3 px-8 md:p-6 md:px-16'>
       {/* Desktop and Tablet */}
       <div className='hidden md:flex w-full h-full items-center justify-between'>
@@ -80,7 +88,7 @@ function Header() {
             <li className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>Menu</li>
             <li className='text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer'>Services</li>
           </motion.ul>
-          <div className="relative flex items-center justify-center">
+          <div className="relative flex items-center justify-center cursor-pointer" onClick={() => handleSidebar()}>
             <IoBasket className='text-textColor text-2xl ml-8 cursor-pointer' />
             <div className="w-5 h-5 rounded-full bg-cartNumBg flex item-center justify-center absolute -top-1 -right-2">
               <p className='text-xs text-white font-semibold leading-0'>0</p>
@@ -198,6 +206,9 @@ function Header() {
       </div>
       </div>
     </header>
+    {toggleSidebar ? <CartContainer action={handleSidebar} /> : ""}
+    
+</>
   );
 }
 
