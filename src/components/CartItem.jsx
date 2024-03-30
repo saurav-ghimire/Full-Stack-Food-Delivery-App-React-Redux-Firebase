@@ -8,9 +8,9 @@ const CartItem = () => {
   const cartItems = useSelector((state) => state.cart);
 
   const handleCart = (productId, action) => {
-    console.log("handleCart called with productId:", productId, "and action:", action);
-    // Dispatch actions based on productId and action
+    action === 'increment' ? dispatch(cartActions.increment(productId)) : dispatch(cartActions.decrement(productId))
   };
+  
 
   return (
     <>
